@@ -6,6 +6,124 @@
 	</head>
 	<body>
 		<canvas data-processing-sources="code.js"></canvas>
-		<canvas data-processing-sources="code.js"></canvas>
+		<script type="application/processing">
+int clockX = 15;
+int clockY = 15;
+int ticky = 0;
+int delayer = 0;
+
+String replies;
+JSONArray values;
+JSONArray getPrizes;
+String[] products= {};
+
+void setup() {
+  startup();
+  size(600, 700);
+}
+
+void draw() {
+  background(0);
+  clock();
+  fill(250, 0, 0);
+  textSize(20);
+  textAlign(CENTER);
+  if (ticky >= 360) {
+    ticky = 0;
+  } else {
+    delayer++;
+  }
+  if (delayer > 5) {
+    ticky++;
+    delayer = 0;
+  }
+}
+
+void startup() {
+  String login = "https://api.hypixel.net/skyblock/bazaar";
+  GetRequest logged = new GetRequest(login);
+  logged.send();
+  replies = logged.getContent();
+  String tempReply[] = {replies};
+  String tempTwoReply[] = {'[' + tempReply[0] + ']'};
+  saveStrings("loginTemp.txt", tempTwoReply);
+  values = loadJSONArray("loginTemp.txt");
+
+  JSONObject dataTable = values.getJSONObject(0); 
+  JSONObject gettingProducts = dataTable.getJSONObject("products");
+
+  long[] productTotal = new long[gettingProducts.size()];
+  String[] product = (String[]) gettingProducts.keys().toArray(new String[gettingProducts.size()]);
+
+  for (int i = 0; i < product.length; i++) {
+    JSONObject gettingSpecificProduct = gettingProducts.getJSONObject(product[i]);
+    JSONArray gettingbuysummary = gettingSpecificProduct.getJSONArray("buy_summary");
+    int[] productTotalTemp = new int[gettingbuysummary.size()];
+    for (int j = 0; j < (floor(gettingbuysummary.size() * 1)); j++) {
+      JSONObject buyAmounts = gettingbuysummary.getJSONObject(j);
+      float amounts = buyAmounts.getInt("amount");
+      float price = buyAmounts.getInt("pricePerUnit");
+      int temp = floor(amounts * price);
+      productTotalTemp[j] = temp;
+    }
+
+    long tempTwo = 0;
+    for (int k = 0; k < productTotalTemp.length; k++) {
+      tempTwo += productTotalTemp[k];
+    }
+    productTotal[i] = tempTwo;
+  }
+
+  //String[][] arranged = new String[1][2];
+  //String[] arranging = new String[productTotal.length];
+  String[] arranging = new String[2];
+  String[] arrangingName = new String[2];
+  for (int i = 0; i < arranging.length; i++) {
+    arranging[i] = "0";
+  }
+  for (int i = 0; i < arrangingName.length; i++) {
+    arrangingName[i] = "0";
+  }
+  arranging[1] = "9999999";
+  boolean in = false;
+  int temp = 0;
+  println("start");
+  for (int i = 1; i < productTotal.length; i++) {
+    in = false;
+    temp = 0;
+    for (int j = 0; j < arranging.length - 1; j++) {
+      if ((productTotal[i] > int(arranging[j])) && in == false && (productTotal[i] < int(arranging[j + 1]))) {
+        in = true;
+        temp = j + 1;
+        //println("temp = " + temp);
+      }
+    }
+    if (in == true) {
+      arranging = splice(arranging, str(productTotal[i]), temp);
+      arrangingName = splice(arrangingName, product[i], temp);
+    } else {
+      //arranging = splice(arranging, str(productTotal[i]), arranging.length);
+    }
+  }
+
+  println("length = "+ arranging.length);
+  for (int i = 0; i < arranging.length; i++) {
+    println(arranging[i] + "       " + arrangingName[i]);
+  }
+}
+
+void clock() {
+  stroke(255, 0, 0);
+  strokeWeight(2);
+  pushMatrix();
+  noFill();
+  translate(30, 30);
+  circle(0, 0, 58);
+  rotate((ticky / TWO_PI) / 2);
+  line(20, 20, 0, 0);
+  popMatrix();
+}
+</script>
+			
 	</body>
 </html>
