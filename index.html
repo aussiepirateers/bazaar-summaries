@@ -6,7 +6,7 @@
 <body>
   <script>
     function once(){
-      fetch("https://zenquotes.io/api/random", same-origin)
+      fetch("https://zenquotes.io/api/random", {credentials: 'same-origin'})
        .then(function (response) {
          return response.json();
        })
