@@ -9,7 +9,7 @@
       fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
     .then(res => res.json())
     .then((res) => {
-        console.log('Output: ', res);
+        console.log(res);
 }).catch(err => console.error(err));
     }
   </script>
