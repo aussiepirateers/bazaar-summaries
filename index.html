@@ -5,13 +5,15 @@
 </head>
 <body>
   <script>
-    function quote(){
-      fetch("https://api.hypixel.net/skyblock/bazaar", {credentials: 'same-origin', mode: 'no-cors'})
-    .then(res => res.json())
-    .then((res) => {
-        console.log(res)
-})
-    }
+    function getQuote() {
+	return fetch("https://zenquotes.io/api/random")
+		.then((res) => {
+			return res.json();
+		})
+		.then((data) => {
+			return data[0]["q"] + " -" + data[0]["a"];
+		});
+}
     function test(){
       fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
          .then(response => response.json())
@@ -19,7 +21,10 @@
           console.log(data)
       })
     }
+    function get(){
+      console.log(getQuote());
+    }
   </script>
-  <button onclick="quote()">Click me</button>
+  <button onclick="get()">Click me</button>
 </body>
 </html>
