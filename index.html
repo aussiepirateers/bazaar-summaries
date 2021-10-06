@@ -5,13 +5,13 @@
 </head>
 <body>
   <script>
-    function quote(){
-      fetch("https://api.hypixel.net/skyblock/bazaar", {credentials: 'same-origin', mode: 'no-cors'})
-    .then(res => res.json())
-    .then((res) => {
-        console.log(res)
-}).catch(err => console.error(err));
-    }
+    function test(){
+  fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
+  .then(response => response.json())
+  .then(data => {
+      console.log(data)
+  })
+}
     function test(){
       fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
          .then(response => response.json())
