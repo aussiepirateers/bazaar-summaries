@@ -8,8 +8,8 @@
     function quote(){
       fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
     .then(res => res.json())
-    .then((out) => {
-        console.log('Output: ', out);
+    .then((res) => {
+        console.log('Output: ', res);
 }).catch(err => console.error(err));
     }
   </script>
