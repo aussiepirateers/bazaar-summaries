@@ -6,11 +6,10 @@
 <body>
   <script>
     function quote(){
-      console.log(JSON.parse(fetch("https://api.hypixel.net/skyblock/bazaar", {credentials: 'same-origin', mode: 'no-cors'})));
-      fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
+      fetch("https://api.hypixel.net/skyblock/bazaar", {credentials: 'same-origin', mode: 'no-cors'})
     .then(res => res.json())
     .then((res) => {
-        console.log(res);
+        console.log(res)
 }).catch(err => console.error(err));
     }
     function test(){
