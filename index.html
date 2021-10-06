@@ -6,8 +6,7 @@
 <body>
   <script>
     function quote(){
-      let temp = JSON.parse(fetch("https://api.hypixel.net/skyblock/bazaar", {credentials: 'same-origin', mode: 'no-cors'}));
-      console.log(temp);
+      console.log(JSON.parse(fetch("https://api.hypixel.net/skyblock/bazaar", {credentials: 'same-origin', mode: 'no-cors'})));
       fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
     .then(res => res.json())
     .then((res) => {
