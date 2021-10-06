@@ -14,7 +14,14 @@
         console.log(res);
 }).catch(err => console.error(err));
     }
+    function test(){
+      fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
+         .then(response => response.json())
+         .then(data => {
+          console.log(data)
+      }
+    }
   </script>
-  <button onclick="quote()">Click me</button>
+  <button onclick="test()">Click me</button>
 </body>
 </html>
