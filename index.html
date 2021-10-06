@@ -5,7 +5,11 @@
 </head>
 <body>
   <script>
-    function once(){
+    function quote(){
+	    console.log(quote());
+	    
+    }
+    function quote(){
       fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
         .then((res) => {
           console.log("Hello world!");
@@ -18,6 +22,6 @@
 	    	});
     }
   </script>
-  <button onclick="once()">Click me</button>
+  <button onclick="require()">Click me</button>
 </body>
 </html>
