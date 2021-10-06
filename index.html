@@ -6,7 +6,7 @@
 <body>
   <script>
     function quote(){
-      fetch('https://zenquotes.io/api/random')
+      fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
     .then(res => res.json())
     .then((out) => {
         console.log('Output: ', out);
