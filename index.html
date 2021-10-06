@@ -5,16 +5,19 @@
 </head>
 <body>
   <script>
-fetch("https://zenquotes.io/api/random")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (myJson) {
-    console.log(myJson);
-  })
-  .catch(function (error) {
-    console.log("Error: " + error);
-  });
+    function once(){
+      fetch("https://zenquotes.io/api/random")
+       .then(function (response) {
+         return response.json();
+       })
+       .then(function (myJson) {
+         console.log(myJson);
+       })
+       .catch(function (error) {
+         console.log("Error: " + error);
+        });
+    }
   </script>
+  <button onclick="once()">Click me</button>
 </body>
 </html>
