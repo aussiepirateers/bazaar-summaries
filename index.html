@@ -7,8 +7,15 @@
   <script>
     function once(){
       fetch("https://zenquotes.io/api/random", {credentials: 'same-origin', mode: 'no-cors'})
-        .then(response => response.json())
-        .then(data => console.log(data));
+        .then((res) => {
+          console.log("Hello world!");
+          console.log(res);
+	    		return res.json();
+	    	})
+	      	.then((data) => {
+          console.log(data);
+	    		return data[0]["q"] + " -" + data[0]["a"];
+	    	});
     }
   </script>
   <button onclick="once()">Click me</button>
